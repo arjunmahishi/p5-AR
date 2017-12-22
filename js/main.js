@@ -1,25 +1,35 @@
 var stars = [];
-var density = 600;
+var density = 100;
 var starImage;
 
 function setup() { 
-  createCanvas(600, 400);
+  createCanvas(window.innerWidth, window.innerHeight);
   capture = createCapture(VIDEO);
   capture.hide();
 	for(var i=0;i < density;i++){
 		var pos = {
-			x: random(-width, width),
-			y: random(-height, height),
-			z: random(width)
+			x: random(0, width),
+			y: random(0, height)
 		}
-		stars[i] = new Star(pos, 5, 20);
+		var speed = random(5, 10);
+		stars[i] = new Star(pos, 5, speed);
 	}
 } 
 
 function draw() { 
 	background(50);
-	image(capture, 0, 0);
-	translate(width/2, height/2);
+	image(capture, 0, 0, width, height);
+	// translate(width/2, height/2);
+
+	if(stars.length < 5){
+		var pos = {
+			x: random(0, width),
+			y: 0
+		}
+		var speed = random(5, 10);
+		stars.push(new Star(pos, 5, speed));
+	}
+
 	stars.map(star => {
 		star.move()
 		star.show();
@@ -34,20 +44,11 @@ class Star{
 	}
 	
 	show(){
-				
-		var sx = map(this.pos.x/this.pos.z, 0, 1, 0, width);
-		var sy = map(this.pos.y/this.pos.z, 0, 1, 0, height);
-		
 		noStroke();
-		ellipse(sx, sy, this.radius, this.radius);
+		ellipse(this.pos.x, this.pos.y, this.radius, this.radius);
 	}
 	
 	move(){
-		this.pos.z -= this.speed;
-		if(this.pos.z < 1) {
-			this.pos.x = random(-width, width);
-			this.pos.y = random(-height, height);
-			this.pos.z = width;
-		}
+		this.pos.y = this.pos.y > height ? 0 : this.pos.y + this.speed;
 	}
 }
