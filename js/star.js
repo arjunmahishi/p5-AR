@@ -1,6 +1,11 @@
 var stars = [];
 var density = 100;
-var starImage;
+var snowImage;
+var snowSize = 20;
+
+function preload(){
+	snowImage = loadImage("assets/images/snow.jpg");
+}
 
 function setup() { 
   createCanvas(window.innerWidth, window.innerHeight);
@@ -12,7 +17,7 @@ function setup() {
 			y: random(0, height)
 		}
 		var speed = random(5, 10);
-		stars[i] = new Star(pos, 5, speed);
+		stars[i] = new Star(pos, snowSize, speed);
 	}
 } 
 
@@ -45,7 +50,8 @@ class Star{
 	
 	show(){
 		noStroke();
-		ellipse(this.pos.x, this.pos.y, this.radius, this.radius);
+		// ellipse(this.pos.x, this.pos.y, this.radius, this.radius);
+		image(snowImage, this.pos.x, this.pos.y, this.radius, this.radius);
 	}
 	
 	move(){
