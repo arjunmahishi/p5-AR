@@ -1,7 +1,7 @@
 var stars = [];
 var density = 100;
 var snowImage;
-var snowSize = 20;
+var snowSize = 10;
 
 function preload(){
 	snowImage = loadImage("assets/images/snow.jpg");
@@ -50,8 +50,8 @@ class Star{
 	
 	show(){
 		noStroke();
-		// ellipse(this.pos.x, this.pos.y, this.radius, this.radius);
-		image(snowImage, this.pos.x, this.pos.y, this.radius, this.radius);
+		ellipse(this.pos.x, this.pos.y, this.radius, this.radius);
+		// image(snowImage, this.pos.x, this.pos.y, this.radius, this.radius);
 	}
 	
 	move(){
