@@ -49,11 +49,14 @@ function draw() {
     noFill();
     stroke(0);
     strokeWeight(4);
+    textSize(32);
     if(trackingData){ //if there is tracking data to look at, then...
         clear();
 
         for (var i = 0; i < trackingData.length; i++) { //loop through each of the detected colors
             rect(trackingData[i].x,trackingData[i].y,trackingData[i].width,trackingData[i].height);
+            fill(0);
+            text(trackingData[i].color, trackingData[i].x,trackingData[i].y)
         }
     }
 }
